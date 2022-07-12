@@ -36,7 +36,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/5_dead/D-54.png',
         'img/2_character_pepe/5_dead/D-55.png',
         'img/2_character_pepe/5_dead/D-56.png',
-        'img/2_character_pepe/5_dead/D-57.png',
+        'img/2_character_pepe/5_dead/D-57.png'
     ];
     world;
     //walking_sound = new Audio('audio/walking.mp3');
@@ -77,8 +77,6 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT)
-            } else if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
@@ -88,5 +86,13 @@ class Character extends MovableObject {
                 }
             }
         }, 75);
-    }
+
+        let isDeadInterval = setInterval(() => { // noch NACHFRAGEN!
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+                clearInterval(isDeadInterval);
+            } 
+        }, 1000);
+        
+    } 
 }
