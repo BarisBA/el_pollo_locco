@@ -36,7 +36,11 @@ class World{
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBarHealth.setPercentage(this.character.energy);
-            }
+                console.log('cha', this.character.energy) 
+            } else if (this.character.isCollidingFromTop(enemy)) {
+                enemy.hitEnemy();
+                console.log('enemy enrgy is', enemy.enemiesEnergy);
+            } 
         });
     }
 
