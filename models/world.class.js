@@ -43,15 +43,17 @@ class World{
             }
         });
         this.level.bottles.forEach(bottle => {
+            console.log('bottles collected', this.character.bottlesCollected); 
             if (this.character.isColliding(bottle)) {
                 this.character.collectedBottles();
-                this.statusBarBottle.setPercentage(this.character.bottlesCollected)
+                this.statusBarBottle.setPercentage(this.character.bottlesCollected);
+                console.log('bottles collected', this.character.bottlesCollected); 
             }
         });
     }
 
     checkForThrow() {
-        if (this.character.bottlesCollected >= 20 && this.keyboard.D) {
+        if (this.bottlesCollected >= 20 && this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
            
