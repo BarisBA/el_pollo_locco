@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 1.5;
     lastHit = 0;
-    enemiesEnergy = 10;
+    bottlesCollected = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -47,6 +47,13 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.energy == 0;
+    }
+
+    collectedBottles() {
+        this.bottlesCollected += 20;
+        if (this.bottlesCollected > 100) {
+            this.bottlesCollected = 100;
+        } 
     }
 
 

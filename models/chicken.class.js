@@ -9,6 +9,10 @@ class Chicken extends MovableObject {
         'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ];
 
+    IMAGES_CHICKEN_DEAD = [
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
+    ];
+
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -27,5 +31,12 @@ class Chicken extends MovableObject {
         setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
+
+        let isDeadInterval = setInterval(() => { // noch NACHFRAGEN!
+            if (this.isDead()) {
+                this.loadImage(this.IMAGES_CHICKEN_DEAD);  
+                clearInterval(isDeadInterval);     
+            } 
+        }, 100);
     }
 }

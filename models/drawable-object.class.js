@@ -19,14 +19,21 @@ class DrawableObject {
         if (this instanceof Character || this instanceof Chicken) {
             ctx.beginPath();
             ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
+            ctx.strokeStyle = 'red';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
 
         } else if (this instanceof SmallChicken) {
             ctx.beginPath();
             ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+        if (this instanceof Bottle) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'red';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }

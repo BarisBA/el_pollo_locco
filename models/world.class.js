@@ -33,21 +33,28 @@ class World{
 
     checkCollsions() {
         this.level.enemies.forEach(enemy => {
-            if (this.character.isColliding(enemy)) {
+    	    if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+                enemy.hit();
+                console.log('enemies energy is', enemy.energy);
+            } else if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBarHealth.setPercentage(this.character.energy);
                 console.log('cha', this.character.energy) 
-            } else if (this.character.isColliding(enemy) && this.isAboveGround()) {
-                enemy.hit();
-                console.log('enemies energy is', enemy.energy);
-            } 
+            }
+        });
+        this.level.bottles.forEach(bottle => {
+            if (this.character.isColliding(bottle)) {
+                this.character.collectedBottles();
+                this.statusBarBottle.setPercentage(this.character.bottlesCollected)
+            }
         });
     }
 
     checkForThrow() {
-        if (this.keyboard.D) {
+        if (this.character.bottlesCollected >= 20 && this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
+           
         }
     }
 
