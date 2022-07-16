@@ -46,6 +46,7 @@ class World{
             if (this.character.isColliding(bottle)) {
                 this.character.collectedBottles();
                 this.statusBarBottle.setPercentage(this.character.bottlesCollected);
+                this.status = true;
                 console.log('bottles collected', this.character.bottlesCollected); 
             }
         });
@@ -77,8 +78,11 @@ class World{
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
+
+        if (this.status = false) {
+            this.addObjectsToMap(this.level.bottles);
+        }
 
         this.ctx.translate(-this.camera_x, 0);
 
