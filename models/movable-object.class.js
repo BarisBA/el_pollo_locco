@@ -56,6 +56,13 @@ class MovableObject extends DrawableObject {
         } 
     }
 
+    removeCollectedBottle() {
+        this.bottlesCollected -= 20;
+        if (this.bottlesCollected < 0) {
+            this.bottlesCollected = 0;
+        } 
+    }
+
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
