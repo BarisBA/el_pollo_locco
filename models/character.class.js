@@ -93,7 +93,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 clearInterval(isDeadInterval);
             } 
-        }, 1000);
+        }, 1000 / 60);
         
     } 
 }

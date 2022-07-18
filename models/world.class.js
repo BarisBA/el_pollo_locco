@@ -35,21 +35,21 @@ class World{
         this.level.enemies.forEach(enemy => {
     	    if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 enemy.hit();
-                console.log('enemies energy is', enemy.energy);
+                //console.log('enemies energy is', enemy.energy);
             } else if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBarHealth.setPercentage(this.character.energy);
-                console.log('cha', this.character.energy) 
+                //console.log('cha', this.character.energy) 
             }
         });
         this.level.bottles.forEach(bottle => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectedBottles();
                 this.statusBarBottle.setPercentage(this.character.bottlesCollected);
-                this.status = true;
-                console.log('bottles collected', this.character.bottlesCollected); 
+                this.throwableObjects.splice(this.level.bottles.splice(0, 1));
+                //console.log('bottles collected', this.character.bottlesCollected); 
             }
-        });
+        }); 
     }
 
     checkForThrow() {
@@ -78,11 +78,8 @@ class World{
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
-
-        if (this.status = false) {
-            this.addObjectsToMap(this.level.bottles);
-        }
 
         this.ctx.translate(-this.camera_x, 0);
 
