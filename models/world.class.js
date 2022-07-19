@@ -8,6 +8,7 @@ class World{
     statusBarHealth = new StatusBarHealth();
     statusBarCoin = new StatusBarCoin();
     statusBarBottle = new StatusBarBottle();
+    endboss = this.level.endboss[0];
     throwableObjects = [];
     coinsCollected = [];
 
@@ -29,7 +30,7 @@ class World{
             this.checkCollsions();
             this.checkForThrow();
         }, 200);
-        console.log('endboss', this.level.endboss.energy);
+        console.log('endboss', this.endboss.energy);
     }
 
     checkCollsions() {
@@ -37,7 +38,7 @@ class World{
     	    if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 enemy.hit();
                 //console.log('enemies energy is', enemy.energy);
-            } else if (this.character.isColliding(enemy)) {
+            } else if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss)) {
                 this.character.hit();
                 this.statusBarHealth.setPercentage(this.character.energy);
                 //console.log('cha', this.character.energy) 
@@ -50,10 +51,6 @@ class World{
                 this.level.bottles.splice(index, 1);
                 //console.log('bottles collected', this.character.bottlesCollected); 
             }
-            if (bottle.isColliding(this.level.endboss)) {
-                this.level.endboss.hit();
-               
-            }
         }); 
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
@@ -62,6 +59,12 @@ class World{
                 this.level.coins.splice(index, 1);
             }
         }); 
+        this.throwableObjects.forEach(to => {
+            if (to.isColliding(this.endboss)) {
+                this.endboss.hit()
+                console.log('endboss', this.endboss.energy);
+            }
+        });
     }
 
     checkForThrow() {

@@ -7,6 +7,10 @@ function init() {
     world = new World(canvas, keyboard);
 }
 
+function requestFullscreen() {
+    requestFullscreen();
+}
+
 window.addEventListener('keydown',(event) => {
     if (event.keyCode == 37) {
         keyboard.LEFT = true;
@@ -30,6 +34,10 @@ window.addEventListener('keydown',(event) => {
 
     if (event.keyCode == 68) {
         keyboard.D = true;
+    }
+
+    if (event.keyCode == 70) {
+        keyboard.F = true;
     }
     //console.log(event)
 });
@@ -57,5 +65,9 @@ window.addEventListener('keyup',(event) => {
     
     if (event.keyCode == 68) {
         keyboard.D = false;
+    }
+
+    if (event.keyCode == 70) {
+        keyboard.F = false;
     }
 });
