@@ -29,6 +29,7 @@ class World{
             this.checkCollsions();
             this.checkForThrow();
         }, 200);
+        console.log('endboss', this.level.endboss.energy);
     }
 
     checkCollsions() {
@@ -49,9 +50,9 @@ class World{
                 this.level.bottles.splice(index, 1);
                 //console.log('bottles collected', this.character.bottlesCollected); 
             }
-            if (this.level.endboss.isColliding(bottle)) {
+            if (bottle.isColliding(this.level.endboss)) {
                 this.level.endboss.hit();
-                console.log('endboss', this.level.endboss.energy);
+               
             }
         }); 
         this.level.coins.forEach((coin, index) => {
