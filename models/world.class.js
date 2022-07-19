@@ -42,19 +42,23 @@ class World{
                 //console.log('cha', this.character.energy) 
             }
         });
-        this.level.bottles.forEach(bottle => {
+        this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
                 this.statusBarBottle.setPercentage(this.character.collectedBottles);
-                this.level.bottles.splice(0, 1);
+                this.level.bottles.splice(index, 1);
                 //console.log('bottles collected', this.character.bottlesCollected); 
             }
+            if (this.level.endboss.isColliding(bottle)) {
+                this.level.endboss.hit();
+                console.log('endboss', this.level.endboss.energy);
+            }
         }); 
-        this.level.coins.forEach(coin => {
+        this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentage(this.character.collectedCoins);
-                this.level.coins.splice(0, 1);
+                this.level.coins.splice(index, 1);
             }
         }); 
     }
@@ -83,6 +87,7 @@ class World{
 
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
