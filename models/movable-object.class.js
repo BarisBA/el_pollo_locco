@@ -4,7 +4,8 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 1.5;
     lastHit = 0;
-    bottlesCollected = 0;
+    collectedBottles = 0;
+    collectedCoins = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -49,17 +50,24 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
-    collectedBottles() {
-        this.bottlesCollected += 20;
-        if (this.bottlesCollected > 100) {
-            this.bottlesCollected = 100;
+    collectCoins() {
+        this.collectedCoins += 20;
+        if (this.collectedCoins > 100) {
+            this.collectedCoins = 100;
+        } 
+    }
+
+    collectBottles() {
+        this.collectedBottles += 20;
+        if (this.collectedBottles > 100) {
+            this.collectedBottles = 100;
         } 
     }
 
     removeCollectedBottle() {
-        this.bottlesCollected -= 20;
-        if (this.bottlesCollected < 0) {
-            this.bottlesCollected = 0;
+        this.collectedBottles -= 20;
+        if (this.collectedBottles < 0) {
+            this.collectedBottles = 0;
         } 
     }
 

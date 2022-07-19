@@ -11,7 +11,7 @@ class Bottle extends MovableObject {
     constructor() {
         super();
         this.loadImages(this.IMAGES_BOTTLE_ON_GROUND);
-        this.x = 350 +Math.random() * 950; // Zahl zwischen 200 & 700
+        this.x = 350 +Math.random() * 750; // Zahl zwischen 200 & 700
         this.animate();
     }
 
