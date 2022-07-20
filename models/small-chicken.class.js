@@ -14,7 +14,9 @@ class SmallChicken extends MovableObject {
     ];
 
     constructor() {
-        super().loadImage(this.IMAGES_WALKING[0]);
+        super();
+        this.loadImage(this.IMAGES_WALKING[0]);
+        this.loadImage(this.IMAGES_SMALLCHICKEN_DEAD);
         this.loadImages(this.IMAGES_WALKING);
 
         this.x = 400 +Math.random() * 1200; // Zahl zwischen 200 & 700
@@ -24,19 +26,20 @@ class SmallChicken extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        let smallChickenWalkingInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
 
-        setInterval(() => {
+        let smallChickenMoveLeftInterval = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
         
-        let isDeadInterval = setInterval(() => { // noch NACHFRAGEN!
+        setInterval(() => { // noch NACHFRAGEN!
             if (this.isDead()) {
-                this.loadImage(this.IMAGES_SMALLCHICKEN_DEAD);  
-                clearInterval(isDeadInterval);     
+                this.loadImage(this.IMAGES_SMALLCHICKEN_DEAD);   
+                clearInterval(smallChickenWalkingInterval);
+                clearInterval(smallChickenMoveLeftInterval);
             } 
-        }, 1000);
+        }, 0);
     }
 }

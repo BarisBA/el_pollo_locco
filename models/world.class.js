@@ -1,4 +1,4 @@
-class World{
+class World {
     character = new Character();
     level = level1;
     canvas;
@@ -11,6 +11,8 @@ class World{
     endboss = this.level.endboss[0];
     throwableObjects = [];
     coinsCollected = [];
+    bottleRotation = false;
+    bottleCollision = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -31,6 +33,8 @@ class World{
             this.checkForThrow();
         }, 200);
         console.log('endboss', this.endboss.energy);
+        console.log('rotation is', this.bottleRotation)
+        console.log('collision is', this.bottleCollision)
     }
 
     checkCollsions() {
@@ -53,7 +57,7 @@ class World{
             }
         }); 
         this.level.coins.forEach((coin, index) => {
-            if (this.character.isColliding(coin)) {
+            if (this.character.isColliding(coin) && this.character.isAboveGround()) {
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentage(this.character.collectedCoins);
                 this.level.coins.splice(index, 1);
@@ -61,8 +65,10 @@ class World{
         }); 
         this.throwableObjects.forEach(to => {
             if (to.isColliding(this.endboss)) {
-                this.endboss.hit()
+                this.endboss.hit();
                 console.log('endboss', this.endboss.energy);
+                this.bottleCollision = true;
+                console.log('rotation is', this.bottleCollision)
             }
         });
     }
@@ -73,6 +79,8 @@ class World{
             this.throwableObjects.push(bottle);
             this.character.removeCollectedBottle();
             this.statusBarBottle.setPercentage(this.character.collectedBottles);
+            this.bottleRotation = true;
+            console.log('rotation is', this.bottleRotation)
         }
     }
 
