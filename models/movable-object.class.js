@@ -6,7 +6,6 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     collectedBottles = 0;
     collectedCoins = 0;
-    
 
     applyGravity() {
         setInterval(() => {
@@ -71,7 +70,6 @@ class MovableObject extends DrawableObject {
             this.collectedBottles = 0;
         } 
     }
-
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
