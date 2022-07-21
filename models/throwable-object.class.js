@@ -41,7 +41,7 @@ class ThrowableObject extends MovableObject {
            this.x += 10; 
         }, 40);
 
-        
+        this.bottleRotation = true;
         this.animate();
     }
     animate() {

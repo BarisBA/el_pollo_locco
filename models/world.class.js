@@ -69,7 +69,7 @@ class World {
                 this.endboss.hit();
                 this.statusbarEndboss.setPercentage(this.endboss.energy);
                 console.log('endboss', this.endboss.energy);
-                this.bottleCollision = true;
+                this.ThrowableObject.bottleCollision = true;
                 console.log('collision is', this.bottleCollision)
             }
         });
@@ -81,7 +81,6 @@ class World {
             this.throwableObjects.push(bottle);
             this.character.removeCollectedBottle();
             this.statusBarBottle.setPercentage(this.character.collectedBottles);
-            this.bottleRotation = true;
             console.log('rotation is', this.bottleRotation)
             console.log('bottles collected', this.character.collectedBottles); 
         }
