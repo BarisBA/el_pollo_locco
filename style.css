@@ -2,8 +2,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
 }
 
 canvas {
     background-color: black;
+}
+
+.d-none {
+    display: none;
+}
+
+.startScreen img {
+    object-fit: cover;
+    width: 720px;
+    height: 480px;
 }

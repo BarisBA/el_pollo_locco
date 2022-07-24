@@ -40,6 +40,10 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    attackCharacter() {
+        return this.attack = true;
+    }
+
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
         timePassed = timePassed / 1000; // difference in s
@@ -69,6 +73,10 @@ class MovableObject extends DrawableObject {
         if (this.collectedBottles < 0) {
             this.collectedBottles = 0;
         } 
+    }
+
+    bottleCollision() {
+        return this.bottleCollision = true;
     }
 
     playAnimation(images) {
