@@ -13,6 +13,7 @@ class World {
     throwableObjects = [];
     bottleCollision = false;
     attack = false;
+    gameOver = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -21,6 +22,10 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        
+        setTimeout(() => {
+            this.checkGameOver();
+        }, 10000);
     }
 
     setWorld() {
@@ -32,9 +37,19 @@ class World {
             this.checkCollsions();
             this.checkForThrow();
         }, 200);
+
     }
 
     checkCollsions() {
+        //console.log(this.character.x )
+        this.collidingEnemy();
+        this.collidingBottle();
+        this.collidingCoin();
+        this.collidingThrowableObject();
+        this.collidingEndboss();
+    }
+
+    collidingEnemy() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 enemy.hit();
@@ -45,6 +60,9 @@ class World {
                 }
             }
         });
+    }
+
+    collidingBottle() {
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
@@ -55,6 +73,9 @@ class World {
                 }
             }
         });
+    }
+
+    collidingCoin() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && this.character.isAboveGround()) {
                 this.character.collectCoins();
@@ -62,6 +83,9 @@ class World {
                 this.level.coins.splice(index, 1);
             }
         });
+    }
+
+    collidingThrowableObject() {
         this.throwableObjects.forEach((to, index) => {
             if (to.isColliding(this.endboss)) {
                 this.endboss.hit();
@@ -73,6 +97,9 @@ class World {
                 
             }
         });
+    }
+
+    collidingEndboss() {
         if (this.character.isColliding(this.endboss)) {
             this.endboss.attackCharacter();
         }
@@ -85,6 +112,26 @@ class World {
             this.character.removeCollectedBottle();
             this.statusBarBottle.setPercentage(this.character.collectedBottles);
         }
+    } 
+
+    checkGameOver() {
+            if (this.character.isDead()) {          
+                this.gameOver = true;
+                this.gameIsOver();
+            } else if (this.endboss.isDead()) {          
+                this.gameOver = true;    
+                this.gameIsOver();
+            }
+    }
+
+    gameIsOver() {
+        if (this.gameOver == true) {
+            document.getElementById('canvas').classList.add('d-none');
+            document.getElementById('controls').classList.add('d-none');
+            document.getElementById('gameOverScreen').classList.remove('d-none')
+            document.getElementById('restartButton').classList.remove('d-none') 
+           
+        } this.gameOver = false;
     }
 
     draw() {
@@ -98,7 +145,11 @@ class World {
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
-        this.addToMap(this.statusbarEndboss);
+
+        if (this.character.x > 1300) {
+            this.addToMap(this.statusbarEndboss);
+        }
+        
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Pollo Locco</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fonts.css">
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/character.class.js"></script>
@@ -31,17 +32,22 @@
 
 <body onload="init()">
 
-    <h1>El Pollo Locco</h1>
-
-    <div class="startScreen"> 
+    <div class="startScreen" id="startScreen"> 
         <img src="./img/9_intro_outro_screens/start/startscreen_1.png">
+        <button class="startButton" id="startButton" onclick="startGame()"> Start Game</button>
     </div>
 
+    <div class="d-none startScreen" id="gameOverScreen">
+        <img class="d-none" src="img/9_intro_outro_screens/game_over/oh no you lost!.png">
+        <button class="startButton" id="restartButton" onclick="restartGame()"> Restart Game</button>
+    </div>
+
+   
+    
     <canvas class="d-none" id="canvas" width="720" height="480"></canvas>
 
-    <div class="d-none" >
-        <span>Move Right = Arrow right |</span>
-        <span>Move Left = Arrow Left |</span>
+    <div id="controls">
+        <span>Arrow Left / Right = Run |</span>
         <span>Jump = Space |</span>
         <span>Throw bottle = D |</span>
         <span onclick="canvas.requestFullscreen()"> Fullscreen</span>

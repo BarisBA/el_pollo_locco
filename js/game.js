@@ -7,6 +7,20 @@ function init() {
     world = new World(canvas, keyboard);
 }
 
+function startGame() {
+    document.getElementById('startButton').classList.add('d-none');
+    document.getElementById('startScreen').classList.add('d-none');
+    document.getElementById('canvas').classList.remove('d-none');
+    initLevel();
+}
+
+function restartGame() {
+    document.getElementById('gameOverScreen').classList.add('d-none')
+    document.getElementById('restartButton').classList.add('d-none')
+    startGame();
+    world = new World(canvas, keyboard);
+}
+
 function requestFullscreen() {
     requestFullscreen();
 }

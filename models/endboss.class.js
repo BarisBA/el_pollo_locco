@@ -3,6 +3,7 @@ class Endboss extends MovableObject {
     width = 250;
     y = 50;
     energy = 50;
+    firstContact = false;
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -61,14 +62,20 @@ class Endboss extends MovableObject {
     }
 
     animate() {
+        let i = 0;
         
-        let endbossAlertInterval = setInterval(() => {
-            this.playAnimation(this.IMAGES_ALERT);
-        }, 850);
-
-        let endbossWalkingInterval = setInterval(() => {
-            this.playAnimation(this.IMAGES_ENDBOSS_WALKING);
-        }, 800);
+        let endbossInterval = setInterval(() => {
+            if (i < 8) {
+                this.playAnimation(this.IMAGES_ALERT);
+            } else {
+                this.playAnimation(this.IMAGES_ENDBOSS_WALKING);
+            }
+            i++
+            if (world.character.x > 1500 && !this.firstContact) {
+                i = 0;
+                this.firstContact = true;
+            }
+            }, 850);
 
         let isDeadInterval = setInterval(() => {
             if (this.isHurt()) {
@@ -77,16 +84,19 @@ class Endboss extends MovableObject {
 
             else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
-                clearInterval(endbossAlertInterval);
-                clearInterval(endbossWalkingInterval);
+                clearInterval(endbossInterval);
                 clearInterval(moveLeftInterval);
                 clearInterval(attackInterval);
                 clearInterval(isDeadInterval);
             }
         }, 75);
 
-        let moveLeftInterval = setInterval(() => {
-            this.moveLeft();
+        let moveLeftInterval = setInterval(() => {////////////////////////////////
+            if (this.x > 1400) {
+                this.moveLeft();
+            } else if (this.x < 1400) {
+                this.moveRight();
+            } 
         }, 1000 / 60);
 
         let attackInterval = setInterval(() => {
