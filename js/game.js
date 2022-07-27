@@ -53,6 +53,10 @@ window.addEventListener('keydown',(event) => {
     if (event.keyCode == 70) {
         keyboard.F = true;
     }
+
+    if (event.keyCode == 71) {
+        keyboard.G = true;
+    }
     //console.log(event)
 });
 
@@ -83,5 +87,9 @@ window.addEventListener('keyup',(event) => {
 
     if (event.keyCode == 70) {
         keyboard.F = false;
+    }
+
+    if (event.keyCode == 70) {
+        keyboard.G = false;
     }
 });

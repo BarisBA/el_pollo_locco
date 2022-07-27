@@ -22,7 +22,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        
+
         setTimeout(() => {
             this.checkGameOver();
         }, 10000);
@@ -36,6 +36,8 @@ class World {
         setInterval(() => {
             this.checkCollsions();
             this.checkForThrow();
+            this.checkCoinsCollected();
+            this.checkSecondLife();
         }, 200);
 
     }
@@ -113,6 +115,19 @@ class World {
             this.statusBarBottle.setPercentage(this.character.collectedBottles);
         }
     } 
+
+    checkCoinsCollected() {
+        if (this.character.collectedCoins == 100) {
+            this.character.secondLife = true; 
+        }
+    }
+
+    checkSecondLife() {
+        if (this.keyboard.G && this.character.secondLife == true) {
+            this.character.energy = 100;
+            this.statusBarHealth.setPercentage(this.character.energy);
+        }
+    }
 
     checkGameOver() {
             if (this.character.isDead()) {          
