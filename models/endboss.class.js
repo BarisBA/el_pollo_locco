@@ -70,11 +70,11 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_ENDBOSS_WALKING);
             }
             i++
-            if (world.character.x > 1500 && !this.firstContact) {
+            if (world.character.x > 1400 && !this.firstContact) {
                 i = 0;
                 this.firstContact = true;
             }
-            }, 850);
+            }, 600);
 
         let isDeadInterval = setInterval(() => {
             if (this.isHurt()) {

@@ -42,8 +42,7 @@ class ThrowableObject extends MovableObject {
            this.x += 10; 
         }, 40);
 
-        this.bottleRotation = true;
-        this.animate();
+        this.animate(); 
     }
     
     animate() {
@@ -55,7 +54,7 @@ class ThrowableObject extends MovableObject {
 
         setInterval(() => {
             if (this.bottleCollision == true) {
-                this.playAnimation(this.IMAGES_BOTTLE_SPLASH);    
+                this.playAnimation(this.IMAGES_BOTTLE_SPLASH); // nachfragen
             }
         }, 100);
     }

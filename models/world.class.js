@@ -14,6 +14,10 @@ class World {
     bottleCollision = false;
     attack = false;
     gameOver = false;
+    win_sound = new Audio('audio/win.mp3');
+    heal_up_sound = new Audio('audio/heal_up.mp3');
+    coin_sound = new Audio('audio/coin.mp3');
+    bottle_sound = new Audio('audio/bottle.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -23,7 +27,7 @@ class World {
         this.setWorld();
         this.run();
 
-        setTimeout(() => {
+        setTimeout(() => { //Nachfragen!!!!!!!!!!!
             this.checkGameOver();
         }, 10000);
     }
@@ -80,6 +84,7 @@ class World {
     collidingCoin() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && this.character.isAboveGround()) {
+                this.coin_sound.play();
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentage(this.character.collectedCoins);
                 this.level.coins.splice(index, 1);
@@ -91,12 +96,10 @@ class World {
         this.throwableObjects.forEach((to, index) => {
             if (to.isColliding(this.endboss)) {
                 this.endboss.hit();
+                this.bottle_sound.play();
                 this.statusbarEndboss.setPercentage(this.endboss.energy);
                 to.bottleCollision();
-                setTimeout(() => {
-                    this.throwableObjects.splice(index, 1)
-                }, 150);
-                
+                this.throwableObjects.splice(index, 1)
             }
         });
     }
@@ -111,6 +114,7 @@ class World {
         if (this.character.collectedBottles >= 20 && this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
+            bottle.bottleRotation = true;
             this.character.removeCollectedBottle();
             this.statusBarBottle.setPercentage(this.character.collectedBottles);
         }
@@ -124,8 +128,13 @@ class World {
 
     checkSecondLife() {
         if (this.keyboard.G && this.character.secondLife == true) {
+            this.heal_up_sound.play();
+            this.character.secondLife = false;
             this.character.energy = 100;
             this.statusBarHealth.setPercentage(this.character.energy);
+            this.character.collectedCoins = 0
+            this.statusBarCoin.setPercentage(this.character.collectedCoins);
+            this.checkCollsions();
         }
     }
 
@@ -136,6 +145,7 @@ class World {
             } else if (this.endboss.isDead()) {          
                 this.gameOver = true;    
                 this.gameIsOver();
+                this.win_sound.play();
             }
     }
 

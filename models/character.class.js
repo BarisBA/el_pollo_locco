@@ -67,6 +67,9 @@ class Character extends MovableObject {
     ];
     world;
     //walking_sound = new Audio('audio/walking.mp3');
+    character_hurt_sound = new Audio('audio/character_hurt.mp3');
+    character_dead_sound = new Audio('audio/character_dead.mp3');
+    character_jump_sound = new Audio('audio/jump.mp3');
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
@@ -97,6 +100,7 @@ class Character extends MovableObject {
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                this.character_jump_sound.play();
             }
 
             this.world.camera_x = -this.x + 50;
@@ -106,12 +110,14 @@ class Character extends MovableObject {
         let animation = setInterval(() => {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT)
+                //this.character_hurt_sound.play();
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.character_dead_sound.play();
                 clearInterval(animation);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
