@@ -25,11 +25,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.run();
-
-        setTimeout(() => { //Nachfragen!!!!!!!!!!!
-            this.checkGameOver();
-        }, 10000);
+        this.run(); 
     }
 
     setWorld() {
@@ -43,7 +39,6 @@ class World {
             this.checkCoinsCollected();
             this.checkSecondLife();
         }, 200);
-
     }
 
     checkCollsions() {
@@ -53,6 +48,7 @@ class World {
         this.collidingCoin();
         this.collidingThrowableObject();
         this.collidingEndboss();
+        this.checkGameOver();//Nachfragen!!!!!!!!!!!
     }
 
     collidingEnemy() {
@@ -156,7 +152,8 @@ class World {
             document.getElementById('gameOverScreen').classList.remove('d-none')
             document.getElementById('restartButton').classList.remove('d-none') 
            
-        } this.gameOver = false;
+        } 
+        this.gameOver = false;
     }
 
     draw() {

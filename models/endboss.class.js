@@ -55,7 +55,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ENDBOSS_ATTACK);
 
         this.x = 2500;
-        this.speed = 0.8;
+        this.speed = 1.5;
 
         this.animate();
     }
@@ -91,7 +91,7 @@ class Endboss extends MovableObject {
         }, 75);
 
         let moveLeftInterval = setInterval(() => {////////////////////////////////
-            if (this.x > 1400) {
+            if (this.x > 1400 && i > 8) {
                 this.moveLeft();
             } else if (this.x < 1400) {
                 this.moveRight();
