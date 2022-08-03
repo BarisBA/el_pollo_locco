@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     collectedBottles = 0;
     collectedCoins = 0;
     secondLife = false;
+    attack = false;
 
     applyGravity() {
         setInterval(() => {
@@ -43,6 +44,10 @@ class MovableObject extends DrawableObject {
 
     attackCharacter() {
         return this.attack = true;
+    }
+
+    dontAttackCharacter() {
+        return this.attack = false;
     }
 
     isHurt() {

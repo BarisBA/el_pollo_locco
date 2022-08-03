@@ -12,7 +12,6 @@ class World {
     endboss = this.level.endboss[0];
     throwableObjects = [];
     bottleCollision = false;
-    attack = false;
     gameOver = false;
     gameWin = false;
     win_sound = new Audio('audio/win.mp3');
@@ -120,6 +119,8 @@ class World {
     collidingEndboss() {
         if (this.character.isColliding(this.endboss)) {
             this.endboss.attackCharacter();
+        } else {
+            this.endboss.dontAttackCharacter();
         }
     }
 
