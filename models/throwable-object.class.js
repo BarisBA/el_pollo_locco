@@ -31,6 +31,10 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
 
         this.throw(100, 150);
+
+        if (world.character.otherDirection == true) {/////////////////////////////////////////////////////////////////
+            this.throwLeft(-100, -150);
+        }
     }
 
     throw() {
@@ -40,6 +44,18 @@ class ThrowableObject extends MovableObject {
 
         setInterval(() => {
            this.x += 10; 
+        }, 40);
+
+        this.animate(); 
+    }
+
+    throwLeft() {
+        this.speedY = 30;
+
+        this.applyGravity();
+
+        setInterval(() => {
+            this.x -= 20; 
         }, 40);
 
         this.animate(); 

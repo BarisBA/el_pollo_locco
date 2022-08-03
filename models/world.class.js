@@ -58,7 +58,7 @@ class World {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 enemy.hit();
                 this.chicken_dead_sound.play();
-            } else if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss)) {
+            } else if (this.character.isColliding(enemy) && !this.character.isHurt() || this.character.isColliding(this.endboss) && !this.character.isHurt()) {
                 if (enemy.energy > 0 && this.endboss.energy > 0) {
                     this.character.hit();
                     this.character_hurt_sound.play();

@@ -91,19 +91,20 @@ class Endboss extends MovableObject {
         }, 75);
 
         let moveLeftInterval = setInterval(() => {////////////////////////////////
-            if (this.x > 1400 && i > 8) {
+            if (world.character.x < this.x && i > 8) {
                 this.moveLeft();
                 this.speed = 3;
-            } else if (this.x < 1400) {
+                this.otherDirection = false;
+            } else if (world.character.x > this.x) {
                 this.moveRight();
                 this.speed = 2 ;
+                this.otherDirection = true;
             } 
         }, 1000 / 60);
 
         let attackInterval = setInterval(() => {
             if (this.attack == true) {
                 this.playAnimation(this.IMAGES_ENDBOSS_ATTACK);
-                this.moveRight();
             } 
         }, 75);
     }

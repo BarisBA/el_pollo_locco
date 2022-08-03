@@ -66,7 +66,6 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/long_idle/I-20.png'
     ];
     world;
-    //walking_sound = new Audio('audio/walking.mp3');
     character_dead_sound = new Audio('audio/character_dead.mp3');
     character_jump_sound = new Audio('audio/jump.mp3');
 
@@ -84,17 +83,14 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
-            //this.walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                //this.walking_sound.play();
             }
 
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.otherDirection = true;
                 this.moveLeft();
-                //this.walking_sound.play();
             }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
