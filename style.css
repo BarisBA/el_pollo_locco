@@ -26,6 +26,20 @@ canvas {
 .startButton {
     position: absolute;
     top: 450px;
+    right: 700px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(218, 138, 64);
+    border-radius: 8px;
+    border: none; 
+    cursor: pointer;
+}
+
+.controlsButton {
+    position: absolute;
+    top: 450px;
     right: 550px;
     padding-left: 40px;
     padding-right: 40px;
@@ -35,4 +49,49 @@ canvas {
     border-radius: 8px;
     border: none; 
     cursor: pointer;
+}
+
+.helpButton {
+    position: absolute;
+    top: 450px;
+    right: 400px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(218, 138, 64);
+    border-radius: 8px;
+    border: none; 
+    cursor: pointer;
+}
+
+.back {
+    position: absolute;
+    top: 450px;
+    right: 550px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(218, 138, 64);
+    border-radius: 8px;
+    border: none; 
+    cursor: pointer;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    min-width: 500px;
+    margin-top: 30px;
+}
+
+.controls img {
+    object-fit: cover;
+    width: 40px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
 }

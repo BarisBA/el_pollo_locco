@@ -14,10 +14,13 @@ class World {
     bottleCollision = false;
     attack = false;
     gameOver = false;
+    gameWin = false;
     win_sound = new Audio('audio/win.mp3');
     heal_up_sound = new Audio('audio/heal_up.mp3');
     coin_sound = new Audio('audio/coin.mp3');
     bottle_sound = new Audio('audio/bottle.mp3');
+    character_hurt_sound = new Audio('audio/character_hurt.mp3');
+    chicken_dead_sound = new Audio('audio/chicken.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -33,11 +36,12 @@ class World {
     }
 
     run() {
-        setInterval(() => {
+        let runInterval = setInterval(() => {
             this.checkCollsions();
             this.checkForThrow();
             this.checkCoinsCollected();
             this.checkSecondLife();
+            this.checkGameOver(runInterval);
         }, 200);
     }
 
@@ -48,16 +52,17 @@ class World {
         this.collidingCoin();
         this.collidingThrowableObject();
         this.collidingEndboss();
-        this.checkGameOver();//Nachfragen!!!!!!!!!!!
     }
 
     collidingEnemy() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 enemy.hit();
+                this.chicken_dead_sound.play();
             } else if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss)) {
                 if (enemy.energy > 0 && this.endboss.energy > 0) {
                     this.character.hit();
+                    this.character_hurt_sound.play();
                     this.statusBarHealth.setPercentage(this.character.energy);
                 }
             }
@@ -93,9 +98,21 @@ class World {
             if (to.isColliding(this.endboss)) {
                 this.endboss.hit();
                 this.bottle_sound.play();
+                this.chicken_dead_sound.play();
                 this.statusbarEndboss.setPercentage(this.endboss.energy);
                 to.bottleCollision();
-                this.throwableObjects.splice(index, 1)
+
+                setTimeout(() => {
+                this.throwableObjects.splice(index, 1)                 
+                }, 200);
+
+            } else if (to.y > 365) {
+                this.bottle_sound.play();
+                to.bottleCollision();
+
+                setTimeout(() => {
+                this.throwableObjects.splice(index, 1)                 
+                }, 100);
             }
         });
     }
@@ -125,7 +142,7 @@ class World {
     checkSecondLife() {
         if (this.keyboard.G && this.character.secondLife == true) {
             this.heal_up_sound.play();
-            this.character.secondLife = false;
+            this.character.secondLife = false;/////////////
             this.character.energy = 100;
             this.statusBarHealth.setPercentage(this.character.energy);
             this.character.collectedCoins = 0
@@ -134,26 +151,32 @@ class World {
         }
     }
 
-    checkGameOver() {
+    checkGameOver(runInterval) {
             if (this.character.isDead()) {          
                 this.gameOver = true;
-                this.gameIsOver();
+                this.gameIsOver(runInterval);
             } else if (this.endboss.isDead()) {          
-                this.gameOver = true;    
-                this.gameIsOver();
+                this.gameWin = true;    
+                this.gameIsOver(runInterval);
                 this.win_sound.play();
             }
     }
 
-    gameIsOver() {
+    gameIsOver(runInterval) {
         if (this.gameOver == true) {
             document.getElementById('canvas').classList.add('d-none');
             document.getElementById('controls').classList.add('d-none');
+            document.getElementById('fullscreen').classList.add('d-none');
             document.getElementById('gameOverScreen').classList.remove('d-none')
             document.getElementById('restartButton').classList.remove('d-none') 
-           
-        } 
-        this.gameOver = false;
+        } else if (this.gameWin == true) {
+            document.getElementById('canvas').classList.add('d-none');
+            document.getElementById('controls').classList.add('d-none');
+            document.getElementById('fullscreen').classList.add('d-none');
+            document.getElementById('winningScreen').classList.remove('d-none')
+            document.getElementById('startButton').classList.remove('d-none') 
+        }
+        clearInterval(runInterval);
     }
 
     draw() {

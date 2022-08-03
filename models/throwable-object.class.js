@@ -1,5 +1,5 @@
 class ThrowableObject extends MovableObject {
-
+    bottleIsColliding = false;
     bottleRotation = false;
 
 
@@ -53,7 +53,7 @@ class ThrowableObject extends MovableObject {
         }, 100);
 
         setInterval(() => {
-            if (this.bottleCollision == true) {
+            if (this.bottleIsColliding == true) {
                 this.playAnimation(this.IMAGES_BOTTLE_SPLASH); // nachfragen
             }
         }, 100);

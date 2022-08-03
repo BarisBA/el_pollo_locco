@@ -32,27 +32,74 @@
 
 <body>
 
-    <div class="startScreen" id="startScreen"> 
+    <!-- This is the start screen-->
+    <div class="startScreen" id="startScreen">
         <img src="./img/9_intro_outro_screens/start/startscreen_1.png">
         <button class="startButton" id="startButton" onclick="startGame();init()"> Start Game</button>
+        <button class="controlsButton" id="controlsButton" onclick="controls()"> Controls</button>
+        <button class="helpButton" id="controlsButton" onclick="help()"> Help</button>
     </div>
 
+    <!-- This is the game over screen-->
     <div class="d-none startScreen" id="gameOverScreen">
         <img src="img/9_intro_outro_screens/game_over/oh no you lost!.png">
         <button class="startButton" id="restartButton" onclick="restartGame()"> Restart Game</button>
+        <button class="controlsButton" id="controlsButton" onclick="controls()"> Controls</button>
+        <button class="helpButton" id="controlsButton" onclick="help()"> Help</button>
+        
+    </div>
+    
+    <!-- This is the help section-->
+    <div class="d-none" id="help">
+        <span>You have to kill the Endboss by throwing bottles at him. <br>
+                Those bottles can be collected with just colliding with them. <br>
+                You can kill the chickens by jumping on them. <br>
+                If you collected enough coins you can fill your lifebar by pressing <b>G</b>.
+        </span>
+        <button class="back" onclick="backToStart()"> Back</button>
     </div>
 
-   
-    
+    <!-- This is the controls section-->
+    <div class="d-none" id="controls">
+        
+            <div class="controls">
+                <span class="center">Move Left  </span>
+                <img src="./img/controls/arrow-left.png">
+            </div>
+            <div class="controls">
+                <span class="center">Move right </span>
+                <img src="./img/controls/arrow-right.png">
+            </div>
+            <div class="controls">
+                <span class="center">Jump </span>
+                <img src="./img/controls/space.png">
+            </div>
+            <div class="controls">
+                <span>Throw bottle </span>
+                <span> D </span>
+            </div>
+            <div class="controls">
+                <span>Fill your lifebar </span>
+                <span>G</span>
+            </div>
+
+        <button class="back" onclick="backToStart()"> Back</button>
+    </div>
+
+    <!-- This is the winning screen-->
+    <div class="d-none" id="winningScreen">
+        <span> YOU ARE A WINNER !!!</span>
+        <button class="startButton" id="startButton" onclick="restartGame()"> Restart Game</button>
+    </div>
+
+    <!-- This is the game screen-->
     <canvas class="d-none" id="canvas" width="720" height="480"></canvas>
 
-    <div id="controls">
-        <span>Arrow Left / Right = Run |</span>
-        <span>Jump = Space |</span>
-        <span>Throw bottle = D |</span>
-        <span>Fill your lifebar = G |</span>
-        <span onclick="canvas.requestFullscreen()"> Fullscreen</span>
+    <!-- This is the fullscreen button-->
+    <div> 
+        <span onclick="canvas.requestFullscreen()" id="fullscreen" > Fullscreen</span>
     </div>
+
 </body>
 
 </html>

@@ -77,7 +77,7 @@ class MovableObject extends DrawableObject {
     }
 
     bottleCollision() {
-        return this.bottleCollision = true;
+        return this.bottleIsColliding = true;
     }
 
     playAnimation(images) {
