@@ -3,14 +3,14 @@ class ThrowableObject extends MovableObject {
     bottleRotation = false;
 
 
-    IMAGES_BOTTLE_ROTATION =  [
+    IMAGES_BOTTLE_ROTATION = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
     ];
 
-    IMAGES_BOTTLE_SPLASH =  [
+    IMAGES_BOTTLE_SPLASH = [
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
@@ -31,10 +31,11 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
 
         this.throw(100, 150);
-
-        if (world.character.otherDirection == true) {/////////////////////////////////////////////////////////////////
-            this.throwLeft(-100, -150);
-        }
+        /*
+            if (world.character.otherDirection == true) {
+                this.throwLeft(-100, -150);
+            }
+        */
     }
 
     throw() {
@@ -43,10 +44,10 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
 
         setInterval(() => {
-           this.x += 10; 
+            this.x += 10;
         }, 40);
 
-        this.animate(); 
+        this.animate();
     }
 
     throwLeft() {
@@ -55,16 +56,16 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
 
         setInterval(() => {
-            this.x -= 20; 
+            this.x -= 40;
         }, 40);
 
-        this.animate(); 
+        this.animate();
     }
-    
+
     animate() {
         setInterval(() => {
             if (this.bottleRotation == true) {
-                this.playAnimation(this.IMAGES_BOTTLE_ROTATION);  
+                this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
             }
         }, 100);
 

@@ -9,7 +9,6 @@ function init() {
 
 function startGame() {
     document.getElementById('startScreen').classList.add('d-none');
-    document.getElementById('fullscreen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
     initLevel();
 }
