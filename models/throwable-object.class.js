@@ -2,7 +2,6 @@ class ThrowableObject extends MovableObject {
     bottleIsColliding = false;
     bottleRotation = false;
 
-
     IMAGES_BOTTLE_ROTATION = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -30,33 +29,33 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.IMAGES_BOTTLE_ROTATION);
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
 
-        this.throw(100, 150);
-        /*
-            if (world.character.otherDirection == true) {
-                this.throwLeft(-100, -150);
-            }
-        */
+        if (world.character.otherDirection == true) {
+            this.throwLeft(-150, -100); ///////
+        } else {
+            this.throw(100, 150);
+        }
+        
     }
 
     throw() {
-        this.speedY = 30;
+        this.speedY = 15;
 
         this.applyGravity();
 
         setInterval(() => {
-            this.x += 10;
+            this.x += 15;
         }, 40);
 
         this.animate();
     }
 
     throwLeft() {
-        this.speedY = 30;
+        this.speedY = 15;
 
         this.applyGravity();
 
         setInterval(() => {
-            this.x -= 40;
+            this.x -= 20;
         }, 40);
 
         this.animate();

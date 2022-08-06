@@ -57,6 +57,7 @@ class Endboss extends MovableObject {
         this.x = 2500;
         this.speed = 1.5;
 
+        this.applyGravity();
         this.animate();
     }
 
@@ -70,7 +71,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_ENDBOSS_WALKING);
             }
             i++
-            if (world.character.x > 1600 && !this.firstContact) {
+            if (world.character.x > 1300 && !this.firstContact) {
                 i = 0;
                 this.firstContact = true;
             }
@@ -84,28 +85,35 @@ class Endboss extends MovableObject {
             else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
                 clearInterval(endbossInterval);
-                clearInterval(moveLeftInterval);
+                clearInterval(moveInterval);
                 clearInterval(attackInterval);
                 clearInterval(isDeadInterval);
             }
         }, 75);
 
-        let moveLeftInterval = setInterval(() => {////////////////////////////////
-            if (world.character.x < this.x && i > 8) {
+        let moveInterval = setInterval(() => {////////////////////////////////
+            if (i > 8) {
                 this.moveLeft();
-                this.speed = 3;
+                this.speed = 2;
                 this.otherDirection = false;
-            } else if (world.character.x > this.x) {
+            } 
+            if (world.character.x > this.x) {
                 this.moveRight();
-                this.speed = 2 ;
-                this.otherDirection = true;
+                this.speed = 2;
+                this.otherDirection = true;  
             } 
         }, 1000 / 60);
+
+        setInterval(() => { 
+            if (i > 8 && !this.isAboveGround() && !this.isDead()) {
+                this.jump();
+            }
+        }, 3000);
 
         let attackInterval = setInterval(() => {
             if (this.attack == true) {
                 this.playAnimation(this.IMAGES_ENDBOSS_ATTACK);
             } 
-        }, 75);
+        },150);
     }
 }

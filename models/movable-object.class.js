@@ -23,8 +23,10 @@ class MovableObject extends DrawableObject {
             return true;
         } else if (this instanceof Character) {
             return this.y < 165;
-        } else {
+        } else if (this instanceof SmallChicken){
             return this.y < 365;
+        } else if (this instanceof Endboss) {
+            return this.y < 65;
         }
     }
 
@@ -48,10 +50,6 @@ class MovableObject extends DrawableObject {
         return this.attack = true;
     }
 
-    dontAttackCharacter() {
-        return this.attack = false;
-    }
-
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
         timePassed = timePassed / 1000; // difference in s
@@ -63,7 +61,7 @@ class MovableObject extends DrawableObject {
     }
 
     collectCoins() {
-        this.collectedCoins += 20;
+        this.collectedCoins += 10;
         if (this.collectedCoins > 100) {
             this.collectedCoins = 100;
         } 
@@ -103,6 +101,10 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 20;
+        if (this instanceof Endboss) {
+            this.speedY = 30;
+        } else {
+            this.speedY = 20;
+        }
     }
 }

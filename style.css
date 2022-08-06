@@ -6,7 +6,24 @@ body {
     align-items: center;
     min-height: 100vh;
     background-image: url('img/new_wallpaper/desert.png');
+    background-repeat: no-repeat;
+    background-size:100%;
     font-family: 'Ultra', serif;
+    letter-spacing: 1px;
+}
+
+button {
+    font-family: 'Ultra', serif;
+    letter-spacing: 1px;
+}
+
+.helpSection {
+    margin: 15px;
+}
+
+.helpTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 canvas {
@@ -23,10 +40,11 @@ canvas {
     height: 480px;
 }
 
-.startButton {
-    position: absolute;
-    top: 450px;
-    right: 700px;
+.menu {
+    margin: 10px;
+}
+
+.button {
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 20px;
@@ -37,32 +55,8 @@ canvas {
     cursor: pointer;
 }
 
-.controlsButton {
-    position: absolute;
-    top: 450px;
-    right: 550px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background-color: rgb(218, 138, 64);
-    border-radius: 8px;
-    border: none; 
-    cursor: pointer;
-}
-
-.helpButton {
-    position: absolute;
-    top: 450px;
-    right: 400px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background-color: rgb(218, 138, 64);
-    border-radius: 8px;
-    border: none; 
-    cursor: pointer;
+.button:hover {
+    opacity: 0.5;
 }
 
 .back {

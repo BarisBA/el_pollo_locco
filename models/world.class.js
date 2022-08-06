@@ -20,6 +20,7 @@ class World {
     bottle_sound = new Audio('audio/bottle.mp3');
     character_hurt_sound = new Audio('audio/character_hurt.mp3');
     chicken_dead_sound = new Audio('audio/chicken.mp3');
+    endboss_sound = new Audio('audio/endboss_sound.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -83,11 +84,14 @@ class World {
 
     collidingCoin() {
         this.level.coins.forEach((coin, index) => {
-            if (this.character.isColliding(coin) && this.character.isAboveGround()) {
-                this.coin_sound.play();
+            if (this.character.isColliding(coin) && this.character.isAboveGround()) {          
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentage(this.character.collectedCoins);
-                this.level.coins.splice(index, 1);
+
+                if (this.character.collectedCoins < 100) {
+                    this.level.coins.splice(index, 1);
+                    this.coin_sound.play();
+                }
             }
         });
     }
@@ -97,7 +101,7 @@ class World {
             if (to.isColliding(this.endboss)) {
                 this.endboss.hit();
                 this.bottle_sound.play();
-                this.chicken_dead_sound.play();
+                this.endboss_sound.play();
                 this.statusbarEndboss.setPercentage(this.endboss.energy);
                 to.bottleCollision();
 
@@ -117,10 +121,8 @@ class World {
     }
 
     collidingEndboss() {
-        if (this.character.isColliding(this.endboss)) {
+        if (this.endboss.isColliding(this.character)) {
             this.endboss.attackCharacter();
-        } else {
-            this.endboss.dontAttackCharacter();
         }
     }
 
@@ -192,7 +194,7 @@ class World {
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
 
-        if (this.character.x > 1300) {
+        if (this.character.x > 1300 || this.endboss.attackCharacter) {
             this.addToMap(this.statusbarEndboss);
         }
         

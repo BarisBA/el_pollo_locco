@@ -10,6 +10,7 @@ function init() {
 function startGame() {
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('fullscreen').classList.remove('d-none');
     initLevel();
 }
 
@@ -29,7 +30,6 @@ function controls() {
 
 function backToStart() {
     document.getElementById('startScreen').classList.remove('d-none');
-    document.getElementById('fullscreen').classList.remove('d-none')
     document.getElementById('controls').classList.add('d-none');
     document.getElementById('help').classList.add('d-none');
 }

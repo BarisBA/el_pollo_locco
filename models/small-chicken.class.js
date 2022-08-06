@@ -19,7 +19,7 @@ class SmallChicken extends MovableObject {
         this.loadImage(this.IMAGES_SMALLCHICKEN_DEAD);
         this.loadImages(this.IMAGES_WALKING);
 
-        this.x = 400 +Math.random() * 1200; // Zahl zwischen 200 & 700
+        this.x = 400 +Math.random() * 1600; // Zahl zwischen 200 & 700
         this.speed = 0.15 + Math.random() * 0.4;
 
         this.applyGravity();
@@ -33,17 +33,14 @@ class SmallChicken extends MovableObject {
 
         let smallChickenMoveInterval = setInterval(() => {
             this.moveLeft();
-
-            setTimeout(() => {//////////////
-                if (!this.isAboveGround() && !this.isDead()) {
-                    this.jump();
-                }
-            }, 4000);
-            
         }, 1000 / 60);
-        
 
-        
+        setInterval(() => {//////////////
+            if (!this.isAboveGround() && !this.isDead()) {
+                this.jump();
+            }
+        }, 3000);
+
         setInterval(() => { // noch NACHFRAGEN!
             if (this.isDead()) {
                 this.loadImage(this.IMAGES_SMALLCHICKEN_DEAD);   

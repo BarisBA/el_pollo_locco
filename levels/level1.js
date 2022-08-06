@@ -5,6 +5,8 @@ function initLevel() {
             new Chicken(),
             new Chicken(),
             new Chicken(),
+            new Chicken(),
+            new SmallChicken(),
             new SmallChicken(),
             new SmallChicken(),
             new SmallChicken()
@@ -13,7 +15,13 @@ function initLevel() {
             new Endboss()
         ],
         clouds = [
-            new Cloud()
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
         ],
         backgroundObjects = [
             new BackgroundObject('img/5_background/layers/air.png', -719),
@@ -46,9 +54,17 @@ function initLevel() {
             new Coin(),
             new Coin(),
             new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
             new Coin()
         ],
         bottles = [
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
             new Bottle(),
             new Bottle(),
             new Bottle(),
