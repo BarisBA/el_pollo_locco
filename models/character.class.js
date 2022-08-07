@@ -3,6 +3,15 @@ class Character extends MovableObject {
     y = 165;
     speed = 7;
     energy = 100;
+    world;
+    character_dead_sound = new Audio('audio/character_dead.mp3');
+    character_jump_sound = new Audio('audio/jump.mp3');
+    offset = {
+        top: 120,//80
+        left: 40,//10 30
+        right: 50,//10 30
+        bottom: 50//20 30
+    }
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -65,9 +74,6 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/long_idle/I-19.png',
         'img/2_character_pepe/1_idle/long_idle/I-20.png'
     ];
-    world;
-    character_dead_sound = new Audio('audio/character_dead.mp3');
-    character_jump_sound = new Audio('audio/jump.mp3');
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
