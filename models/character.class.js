@@ -8,9 +8,9 @@ class Character extends MovableObject {
     character_jump_sound = new Audio('audio/jump.mp3');
     offset = {
         top: 120,//80
-        left: 40,//10 30
-        right: 50,//10 30
-        bottom: 50//20 30
+        left: 40,//80
+        right: 30,//80
+        bottom: 80//80
     }
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
