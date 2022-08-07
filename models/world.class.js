@@ -17,7 +17,9 @@ class World {
     win_sound = new Audio('audio/win.mp3');
     heal_up_sound = new Audio('audio/heal_up.mp3');
     coin_sound = new Audio('audio/coin.mp3');
-    bottle_sound = new Audio('audio/bottle.mp3');
+    bottle_throw_sound = new Audio('audio/bottle_throw.mp3');
+    bottle_collect_sound = new Audio('audio/collect_bottle.mp3');
+    bottle_shattered_sound = new Audio('audio/bottle_shattered.mp3');
     character_hurt_sound = new Audio('audio/character_hurt.mp3');
     chicken_dead_sound = new Audio('audio/chicken.mp3');
     endboss_sound = new Audio('audio/endboss_sound.mp3');
@@ -62,8 +64,8 @@ class World {
             } else if (this.character.isColliding(enemy) && !this.character.isHurt() || this.character.isColliding(this.endboss) && !this.character.isHurt()) {
                 if (enemy.energy > 0 && this.endboss.energy > 0) {
                     this.character.hit();
-                    this.character_hurt_sound.play();
                     this.statusBarHealth.setPercentage(this.character.energy);
+                    this.character_hurt_sound.play();
                 }
             }
         });
@@ -77,6 +79,7 @@ class World {
 
                 if (this.character.collectedBottles < 100) {
                     this.level.bottles.splice(index, 1);
+                    this.bottle_collect_sound.play();
                 }
             }
         });
@@ -88,7 +91,7 @@ class World {
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentage(this.character.collectedCoins);
 
-                if (this.character.collectedCoins < 100) {
+                if (this.character.collectedCoins <= 100) {
                     this.level.coins.splice(index, 1);
                     this.coin_sound.play();
                 }
@@ -100,7 +103,7 @@ class World {
         this.throwableObjects.forEach((to, index) => {
             if (to.isColliding(this.endboss)) {
                 this.endboss.hit();
-                this.bottle_sound.play();
+                this.bottle_shattered_sound.play();
                 this.endboss_sound.play();
                 this.statusbarEndboss.setPercentage(this.endboss.energy);
                 to.bottleCollision();
@@ -109,8 +112,8 @@ class World {
                 this.throwableObjects.splice(index, 1)                 
                 }, 200);
 
-            } else if (to.y > 365) {
-                this.bottle_sound.play();
+            } else if (to.y > 255) {
+                this.bottle_shattered_sound.play();
                 to.bottleCollision();
 
                 setTimeout(() => {
@@ -127,12 +130,13 @@ class World {
     }
 
     checkForThrow() {
-        if (this.character.collectedBottles >= 20 && this.keyboard.D && this.endboss.allowBottleThrow == true) {
+        if (this.character.collectedBottles >= 20 && this.keyboard.D) {///////////////////////////////////////
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
             bottle.bottleRotation = true;
             this.character.removeCollectedBottle();
             this.statusBarBottle.setPercentage(this.character.collectedBottles);
+            this.bottle_throw_sound.play();
         }
     } 
 
@@ -145,7 +149,7 @@ class World {
     checkSecondLife() {
         if (this.keyboard.G && this.character.secondLife == true) {
             this.heal_up_sound.play();
-            this.character.secondLife = false;/////////////
+            this.character.secondLife = false;
             this.character.energy = 100;
             this.statusBarHealth.setPercentage(this.character.energy);
             this.character.collectedCoins = 0

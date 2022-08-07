@@ -72,7 +72,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_ENDBOSS_WALKING);
             }
             i++
-            if (world.character.x > 1300 && !this.firstContact) {
+            if (world.character.x > 1500 && !this.firstContact) {
                 i = 0;
                 this.firstContact = true;
             }
@@ -95,13 +95,12 @@ class Endboss extends MovableObject {
         let moveInterval = setInterval(() => {
             if (world.character.x > this.x) {
                 this.moveRight();
-                this.speed = 2;
+                this.speed = 2.5;
                 this.otherDirection = true;  
-            } else if (i > 8) {
+            } else if (this.firstContact == true && i > 8) {
                 this.moveLeft();
                 this.speed = 2;
                 this.otherDirection = false;
-                this.allowBottleThrow = true;
             } 
 
         }, 1000 / 60);

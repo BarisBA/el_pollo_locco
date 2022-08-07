@@ -41,6 +41,14 @@ function help() {
     document.getElementById('help').classList.remove('d-none');
 }
 
+function muteAll() {
+    character_hurt_sound = false;
+}
+
+function soundON() {
+    character_hurt_sound = true;
+}
+
 function requestFullscreen() {
     requestFullscreen();
 }
