@@ -4,6 +4,7 @@ class Endboss extends MovableObject {
     y = 50;
     energy = 50;
     firstContact = false;
+    allowBottleThrow = false;
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -91,17 +92,18 @@ class Endboss extends MovableObject {
             }
         }, 75);
 
-        let moveInterval = setInterval(() => {////////////////////////////////
-            if (i > 8) {
-                this.moveLeft();
-                this.speed = 2;
-                this.otherDirection = false;
-            } 
+        let moveInterval = setInterval(() => {
             if (world.character.x > this.x) {
                 this.moveRight();
                 this.speed = 2;
                 this.otherDirection = true;  
+            } else if (i > 8) {
+                this.moveLeft();
+                this.speed = 2;
+                this.otherDirection = false;
+                this.allowBottleThrow = true;
             } 
+
         }, 1000 / 60);
 
         setInterval(() => { 

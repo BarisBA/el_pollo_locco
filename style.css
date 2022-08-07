@@ -34,7 +34,7 @@ canvas {
     display: none;
 }
 
-.startScreen img {
+.startOverScreen img {
     object-fit: cover;
     width: 720px;
     height: 480px;
@@ -88,4 +88,5 @@ canvas {
 .center {
     display: flex;
     align-items: center;
+    justify-content: center;
 }

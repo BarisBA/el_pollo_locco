@@ -127,7 +127,7 @@ class World {
     }
 
     checkForThrow() {
-        if (this.character.collectedBottles >= 20 && this.keyboard.D) {
+        if (this.character.collectedBottles >= 20 && this.keyboard.D && this.endboss.allowBottleThrow == true) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
             bottle.bottleRotation = true;
