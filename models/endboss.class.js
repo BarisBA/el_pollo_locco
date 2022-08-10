@@ -6,10 +6,10 @@ class Endboss extends MovableObject {
     firstContact = false;
     allowBottleThrow = false;
     offset = {
-        top: 120,//  top: 30,
-        left: 40,//  left: 10,
-        right: 30,//  right: 10,
-        bottom: 30//  bottom: 10
+        top: 80,
+        left: 20,
+        right: 40,
+        bottom: 100
     }
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',

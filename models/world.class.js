@@ -67,8 +67,8 @@ class World {
                     this.statusBarHealth.setPercentage(this.character.energy);
                     this.character_hurt_sound.play();
                 }
-            }
-        });
+            }console.log((this.character.isColliding(enemy)))
+        }); 
     }
 
     collidingBottle() {

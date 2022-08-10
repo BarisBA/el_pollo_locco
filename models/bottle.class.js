@@ -2,10 +2,10 @@ class Bottle extends MovableObject {
     height = 60;
     width = 50;
     offset = {
-        top: 0,//10
-        left: 0,//20
-        right: 0,//40
-        bottom: 0//20
+        top: 6,//10
+        left: 10,//20
+        right: 18,//40
+        bottom: 7//20
     };
     /*
     IMAGES_BOTTLE = [
@@ -19,7 +19,7 @@ class Bottle extends MovableObject {
         //this.loadImages(this.IMAGES_BOTTLE);
 
         this.x = 350 +Math.random() * 2000; 
-        this.y = 370 //125 +Math.random() * 270;
+        this.y = 360 //125 +Math.random() * 270;
         //this.animate();
     }
     /*
