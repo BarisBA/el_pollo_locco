@@ -58,9 +58,9 @@
     <div class="d-none" id="help">
         <div class="helpSection">
             <div class="helpTitle">What´s the main goal?</div>
-            <span> 
+            <span>
                 You have to kill the Endboss by throwing bottles at him. <br>
-                Those bottles can be collected with just colliding with them. <br> 
+                Those bottles can be collected with just colliding with them. <br>
             </span>
         </div>
         <div class="helpSection">
@@ -72,7 +72,7 @@
         </div>
         <div class="helpSection">
             <div class="helpTitle">What´s up with the coins?</div>
-            <span> 
+            <span>
                 If you collect enough coins you can fill your lifebar by pressing <b>G</b>. <br>
                 Use that before your life run´s out.
             </span>
@@ -117,6 +117,21 @@
 
     <!-- This is the game screen-->
     <canvas class="d-none" id="canvas" width="720" height="480"></canvas>
+
+    <div class="mobileDnone" id="mobileButtons">
+        <div class="mobile">
+            <div>
+                <img src="./img/controls/mobile-arrow-left.png" ontouchstart="mobileMoveLeft()"
+                    ontouchend="endMoveLeft()">
+                <img src="./img/controls/mobile-arrow-right.png" ontouchstart="mobileMoveRight()"
+                    ontouchend="endMoveRight()">
+            </div>
+            <div>
+                <img src="./img/controls/mobile-jump.png" ontouchstart="mobileJump()" ontouchend="endJump()">
+                <img src="./img/controls/mobile-throw.png" ontouchstart="mobileThrow()" ontouchend="endThrow()">
+            </div>
+        </div>
+    </div>
 
     <!-- This is the fullscreen button-->
     <div>

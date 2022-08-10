@@ -7,7 +7,7 @@ body {
     min-height: 100vh;
     background-image: url('img/new_wallpaper/desert.png');
     background-repeat: no-repeat;
-    background-size:100%;
+    background-size: auto;
     font-family: 'Ultra', serif;
     letter-spacing: 1px;
 }
@@ -28,6 +28,7 @@ button {
 
 canvas {
     background-color: black;
+    display: block;
 }
 
 .d-none {
@@ -36,11 +37,12 @@ canvas {
 
 .startOverScreen img {
     object-fit: cover;
-    width: 720px;
-    height: 480px;
+    width: 100%;
 }
 
 .menu {
+    display: flex;
+    justify-content: center;
     margin: 10px;
 }
 
@@ -53,6 +55,8 @@ canvas {
     border-radius: 8px;
     border: none; 
     cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .button:hover {
@@ -89,4 +93,69 @@ canvas {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.mobileDnone {
+    display: none;
+}
+
+.mobile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mobile img {
+    object-fit: cover;
+    width: 48px;
+}
+
+@media (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+
+    .mobileDnone {
+        display: flex;
+    }
+
+    .button {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .button {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 422px) {
+    .button {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 390px) {
+    .button {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-height: 480px) {
+    canvas {
+        height: 100%;
+    }
+
 }
