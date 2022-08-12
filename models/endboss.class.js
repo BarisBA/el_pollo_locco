@@ -82,7 +82,7 @@ class Endboss extends MovableObject {
                 i = 0;
                 this.firstContact = true;
             }
-            }, 600);
+            }, 200);
 
         let isDeadInterval = setInterval(() => {
             if (this.isHurt()) {
@@ -90,13 +90,16 @@ class Endboss extends MovableObject {
             }
 
             else if (this.isDead()) {
-                this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
                 clearInterval(endbossInterval);
                 clearInterval(moveInterval);
                 clearInterval(attackInterval);
+                this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
+
+                setTimeout(() => {
                 clearInterval(isDeadInterval);
+                }, 2000);
             }
-        }, 75);
+        },150);
 
         let moveInterval = setInterval(() => {
             if (world.character.x > this.x) {

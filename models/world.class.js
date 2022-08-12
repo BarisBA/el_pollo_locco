@@ -15,6 +15,7 @@ class World {
     gameOver = false;
     gameWin = false;
     win_sound = new Audio('audio/win.mp3');
+    lose_sound = new Audio('audio/lose.mp3');
     heal_up_sound = new Audio('audio/heal_up.mp3');
     coin_sound = new Audio('audio/coin.mp3');
     bottle_throw_sound = new Audio('audio/bottle_throw.mp3');
@@ -58,7 +59,7 @@ class World {
 
     collidingEnemy() {
         this.level.enemies.forEach(enemy => {
-            if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+            if (this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead()) {
                 enemy.hit();
                 this.chicken_dead_sound.play();
             } else if (this.character.isColliding(enemy) && !this.character.isHurt() || this.character.isColliding(this.endboss) && !this.character.isHurt()) {
@@ -130,7 +131,7 @@ class World {
     }
 
     checkForThrow() {
-        if (this.character.collectedBottles >= 20 && this.keyboard.D) {///////////////////////////////////////
+        if (this.character.collectedBottles >= 20 && this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
             bottle.bottleRotation = true;
@@ -165,25 +166,30 @@ class World {
             } else if (this.endboss.isDead()) {          
                 this.gameWin = true;    
                 this.gameIsOver(runInterval);
-                this.win_sound.play();
             }
+
     }
 
     gameIsOver(runInterval) {
-        if (this.gameOver == true) {
-            document.getElementById('canvas').classList.add('d-none');
-            document.getElementById('controls').classList.add('d-none');
-            document.getElementById('fullscreen').classList.add('d-none');
-            document.getElementById('gameOverScreen').classList.remove('d-none')
-            document.getElementById('restartButton').classList.remove('d-none') 
-        } else if (this.gameWin == true) {
-            document.getElementById('canvas').classList.add('d-none');
-            document.getElementById('controls').classList.add('d-none');
-            document.getElementById('fullscreen').classList.add('d-none');
-            document.getElementById('winningScreen').classList.remove('d-none')
-            document.getElementById('startButton').classList.remove('d-none') 
-        }
-        clearInterval(runInterval);
+        setTimeout(() => {
+            if (this.gameOver == true) {
+                document.getElementById('canvas').classList.add('d-none');
+                document.getElementById('controls').classList.add('d-none');
+                document.getElementById('fullscreen').classList.add('d-none');
+                document.getElementById('gameOverScreen').classList.remove('d-none')
+                document.getElementById('restartButton').classList.remove('d-none') 
+                this.lose_sound.play();
+            } else if (this.gameWin == true) {
+                document.getElementById('canvas').classList.add('d-none');
+                document.getElementById('controls').classList.add('d-none');
+                document.getElementById('fullscreen').classList.add('d-none');
+                document.getElementById('winningScreen').classList.remove('d-none')
+                document.getElementById('startButton').classList.remove('d-none') 
+                this.win_sound.play();
+            }
+            clearInterval(runInterval);
+        }, 2000);
+
     }
 
     draw() {

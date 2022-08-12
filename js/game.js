@@ -11,6 +11,11 @@ function startGame() {
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('fullscreen').classList.remove('d-none');
+    
+    if (window.screen.width <= 850 && window.screen.height <= 480) {
+        document.getElementById('mobile').classList.remove('d-none')
+    }
+    
     initLevel();
 }
 
@@ -25,6 +30,7 @@ function controls() {
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('gameOverScreen').classList.add('d-none')
     document.getElementById('fullscreen').classList.add('d-none')
+    document.getElementById('mobile').classList.add('d-none')
     document.getElementById('controls').classList.remove('d-none');
 }
 
@@ -38,6 +44,7 @@ function help() {
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('gameOverScreen').classList.add('d-none')
     document.getElementById('fullscreen').classList.add('d-none')
+    document.getElementById('mobile').classList.add('d-none')
     document.getElementById('help').classList.remove('d-none');
 }
 

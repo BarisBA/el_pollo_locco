@@ -118,10 +118,12 @@ class Character extends MovableObject {
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.character_dead_sound.play();
-                clearInterval(animation);
+                setTimeout(() => {
+                    clearInterval(animation);
+                }, 2000);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 75);
+        }, 150);
     } 
 }

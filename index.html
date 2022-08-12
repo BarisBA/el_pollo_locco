@@ -82,29 +82,31 @@
 
     <!-- This is the controls section-->
     <div class="d-none" id="controls">
-
-        <div class="controls">
-            <span class="center">Move Left </span>
-            <img src="./img/controls/arrow-left.png">
-        </div>
-        <div class="controls">
-            <span class="center">Move right </span>
-            <img src="./img/controls/arrow-right.png">
-        </div>
-        <div class="controls">
-            <span class="center">Jump </span>
-            <img src="./img/controls/space.png">
-        </div>
-        <div class="controls">
-            <span>Throw bottle </span>
-            <span> D </span>
-        </div>
-        <div class="controls">
-            <span>Fill your lifebar </span>
-            <span>G</span>
-        </div>
-
-        <button class="back button" onclick="backToStart()"> Back</button>
+            <div class="controlsMoves">
+                <span class="center">Move Left </span>
+                <img src="./img/controls/arrow-left.png">
+            </div>
+            <div class="controlsMoves">
+                <span class="center">Move right </span>
+                <img src="./img/controls/arrow-right.png">
+            </div>
+            <div class="controlsMoves">
+                <span class="center">Jump </span>
+                <img src="./img/controls/space.png">
+            </div>
+            <div class="controlsMoves">
+                <span>Throw bottle </span>
+                <span> D </span>
+            </div>
+            <div class="controlsMoves">
+                <span>Fill your lifebar </span>
+                <span>G</span>
+            </div>
+            <div class="controlsMoves">
+                <span class="center">Throw Bottle Mobile </span>
+                <img src="./img/controls/mobile-throw.png">
+            </div>
+            <button class="back button" onclick="backToStart()"> Back</button>
     </div>
 
     <!-- This is the winning screen-->
@@ -118,24 +120,22 @@
     <!-- This is the game screen-->
     <canvas class="d-none" id="canvas" width="720" height="480"></canvas>
 
-    <div class="mobileDnone" id="mobileButtons">
-        <div class="mobile">
-            <div>
-                <img src="./img/controls/mobile-arrow-left.png" ontouchstart="mobileMoveLeft()"
-                    ontouchend="endMoveLeft()">
-                <img src="./img/controls/mobile-arrow-right.png" ontouchstart="mobileMoveRight()"
-                    ontouchend="endMoveRight()">
-            </div>
-            <div>
-                <img src="./img/controls/mobile-jump.png" ontouchstart="mobileJump()" ontouchend="endJump()">
-                <img src="./img/controls/mobile-throw.png" ontouchstart="mobileThrow()" ontouchend="endThrow()">
-            </div>
+    <div class="mobile d-none" id="mobile">
+        <div class="mobileArrows">
+            <img src="./img/controls/mobile-arrow-left.png" ontouchstart="mobileMoveLeft()"
+                ontouchend="endMoveLeft()">
+            <img class="marginLeft" src="./img/controls/mobile-arrow-right.png" ontouchstart="mobileMoveRight()"
+                ontouchend="endMoveRight()">
+        </div>
+        <div class="mobileAction">
+            <img src="./img/controls/mobile-jump.png" ontouchstart="mobileJump()" ontouchend="endJump()">
+            <img class="marginLeft" src="./img/controls/mobile-throw.png" ontouchstart="mobileThrow()" ontouchend="endThrow()">
         </div>
     </div>
 
     <!-- This is the fullscreen button-->
     <div>
-        <span class="d-none" onclick="canvas.requestFullscreen()" id="fullscreen"> Fullscreen</span>
+        <span class="d-none fullscreen" onclick="canvas.requestFullscreen()" id="fullscreen"> Fullscreen</span>
     </div>
 
 </body>
