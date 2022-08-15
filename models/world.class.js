@@ -194,12 +194,22 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0);
-        // space for fixed objects
+        this.drawStatusbar();
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.character);
+        this.drawEnemies();
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.throwableObjects);
+        this.ctx.translate(-this.camera_x, 0);
+        this.selfDraw();
+    }
+
+    drawStatusbar() {
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
@@ -207,24 +217,11 @@ class World {
         if (this.character.x > 1300 || this.endboss.attackCharacter) {
             this.addToMap(this.statusbarEndboss);
         }
-        
-        this.ctx.translate(this.camera_x, 0);
+    }
 
-        this.addToMap(this.character);
+    drawEnemies() {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
-        this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottles);
-        this.addObjectsToMap(this.throwableObjects);
-
-        this.ctx.translate(-this.camera_x, 0);
-
-        // draw() wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
     }
 
     addObjectsToMap(objects) {
@@ -243,6 +240,13 @@ class World {
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
+    }
+
+    selfDraw() {
+        let self = this;
+        requestAnimationFrame(function () {
+            self.draw();
+        });
     }
 
     flipImage(mo) {
