@@ -123,7 +123,7 @@ class Character extends MovableObject {
                 this.character_dead_sound.play();
                 setTimeout(() => {
                     clearInterval(animation);
-                }, 2000);
+                }, 1000);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
