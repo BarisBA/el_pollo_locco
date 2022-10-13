@@ -29,7 +29,7 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
 
         if (world.character.otherDirection == true) {
-            this.throwLeft(-150, -100); ///////
+            this.throwLeft(-150, -100); 
         } else {
             this.throw(100, 150);
         }
@@ -69,7 +69,7 @@ class ThrowableObject extends MovableObject {
 
         setInterval(() => {
             if (this.bottleIsColliding == true) {
-                this.playAnimation(this.IMAGES_BOTTLE_SPLASH); // nachfragen
+                this.playAnimation(this.IMAGES_BOTTLE_SPLASH); 
             }
         }, 100);
     }

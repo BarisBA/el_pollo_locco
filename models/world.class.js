@@ -31,7 +31,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.run(); 
+        this.run();
     }
 
     setWorld() {
@@ -69,7 +69,7 @@ class World {
                     this.character_hurt_sound.play();
                 }
             }
-        }); 
+        });
     }
 
     collidingBottle() {
@@ -88,7 +88,7 @@ class World {
 
     collidingCoin() {
         this.level.coins.forEach((coin, index) => {
-            if (this.character.isColliding(coin) && this.character.isAboveGround()) {          
+            if (this.character.isColliding(coin) && this.character.isAboveGround()) {
                 this.character.collectCoins();
                 this.statusBarCoin.setPercentage(this.character.collectedCoins);
 
@@ -103,25 +103,29 @@ class World {
     collidingThrowableObject() {
         this.throwableObjects.forEach((to, index) => {
             if (to.isColliding(this.endboss)) {
-                this.endboss.hit();
-                this.bottle_shattered_sound.play();
-                this.endboss_sound.play();
-                this.statusbarEndboss.setPercentage(this.endboss.energy);
-                to.bottleCollision();
-
-                setTimeout(() => {
-                this.throwableObjects.splice(index, 1)                 
-                }, 200);
+                this.endbossCollision(to);
 
             } else if (to.y > 255) {
                 this.bottle_shattered_sound.play();
                 to.bottleCollision();
 
                 setTimeout(() => {
-                this.throwableObjects.splice(index, 1)                 
+                    this.throwableObjects.splice(index, 1)
                 }, 100);
             }
         });
+    }
+
+    endbossCollision(to) {
+        this.endboss.hit();
+        this.bottle_shattered_sound.play();
+        this.endboss_sound.play();
+        this.statusbarEndboss.setPercentage(this.endboss.energy);
+        to.bottleCollision();
+
+        setTimeout(() => {
+            this.throwableObjects.splice(index, 1)
+        }, 200);
     }
 
     collidingEndboss() {
@@ -139,11 +143,11 @@ class World {
             this.statusBarBottle.setPercentage(this.character.collectedBottles);
             this.bottle_throw_sound.play();
         }
-    } 
+    }
 
     checkCoinsCollected() {
         if (this.character.collectedCoins == 100) {
-            this.character.secondLife = true; 
+            this.character.secondLife = true;
         }
     }
 
@@ -160,36 +164,44 @@ class World {
     }
 
     checkGameOver(runInterval) {
-            if (this.character.isDead()) {          
-                this.gameOver = true;
-                this.gameIsOver(runInterval);
-            } else if (this.endboss.isDead()) {          
-                this.gameWin = true;    
-                this.gameIsOver(runInterval);
-            }
+        if (this.character.isDead()) {
+            this.gameOver = true;
+            this.gameIsOver(runInterval);
+        } else if (this.endboss.isDead()) {
+            this.gameWin = true;
+            this.gameIsOver(runInterval);
+        }
 
     }
 
     gameIsOver(runInterval) {
         setTimeout(() => {
             if (this.gameOver == true) {
-                document.getElementById('canvas').classList.add('d-none');
-                document.getElementById('controls').classList.add('d-none');
-                document.getElementById('fullscreen').classList.add('d-none');
-                document.getElementById('gameOverScreen').classList.remove('d-none')
-                document.getElementById('restartButton').classList.remove('d-none') 
-                this.lose_sound.play();
+                this.lostGame();
             } else if (this.gameWin == true) {
-                document.getElementById('canvas').classList.add('d-none');
-                document.getElementById('controls').classList.add('d-none');
-                document.getElementById('fullscreen').classList.add('d-none');
-                document.getElementById('winningScreen').classList.remove('d-none')
-                document.getElementById('startButton').classList.remove('d-none') 
-                this.win_sound.play();
+                this.wonGame();
             }
             clearInterval(runInterval);
         }, 2000);
 
+    }
+
+    lostGame() {
+        document.getElementById('canvas').classList.add('d-none');
+        document.getElementById('controls').classList.add('d-none');
+        document.getElementById('fullscreen').classList.add('d-none');
+        document.getElementById('gameOverScreen').classList.remove('d-none')
+        document.getElementById('restartButton').classList.remove('d-none')
+        this.lose_sound.play();
+    }
+
+    wonGame() {
+        document.getElementById('canvas').classList.add('d-none');
+        document.getElementById('controls').classList.add('d-none');
+        document.getElementById('fullscreen').classList.add('d-none');
+        document.getElementById('winningScreen').classList.remove('d-none')
+        document.getElementById('startButton').classList.remove('d-none')
+        this.win_sound.play();
     }
 
     draw() {
@@ -235,7 +247,6 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
